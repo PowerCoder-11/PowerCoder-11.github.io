@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Click the Button Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #ffafbd, #ffc3a0);
+        }
+        #game-container {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+        }
+        #click-button {
+            font-size: 24px;
+            padding: 15px 30px;
+            margin-top: 20px;
+            background-color: #ff6f61;
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        #click-button:hover {
+            background-color: #ff4a3d;
+        }
+        #score, #timer {
+            font-size: 24px;
+            margin-top: 20px;
+            color: #333;
+        }
+        button {
+            outline: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="game-container">
+        <h1>Click the Button Game</h1>
+        <button id="click-button" onclick="increaseScore()">Click Me!</button>
+        <p id="score">Score: 0</p>
+        <p id="timer">Time Left: 10s</p>
+        <button onclick="startGame()">Start Game</button>
+    </div>
+
+    <script>
+        let score = 0;
+        let timeLeft = 10;
+        let timerId;
+
+        function increaseScore() {
+            if (timeLeft > 0) {
+                score++;
+                document.getElementById('score').textContent = "Score: " + score;
+            }
+        }
+
+        function startGame() {
+            score = 0;
+            timeLeft = 10;
+            document.getElementById('score').textContent = "Score: 0";
+            document.getElementById('timer').textContent = "Time Left: 10s";
+            clearInterval(timerId);
+            timerId = setInterval(countdown, 1000);
+        }
+
+        function countdown() {
+            if (timeLeft == 0) {
+                clearInterval(timerId);
+                alert("Game Over! Your score is " + score);
+            } else {
+                timeLeft--;
+                document.getElementById('timer').textContent = "Time Left: " + timeLeft + "s";
+            }
+        }
+    </script>
+</body>
+</html>
